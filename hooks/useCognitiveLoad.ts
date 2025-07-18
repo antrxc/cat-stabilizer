@@ -33,28 +33,55 @@ export function useCognitiveLoad(): CognitiveLoadData {
       try {
         // Get score from API with default operational features
         const defaultFeatures: ApiPredictionRequest = {
-          active_tasks: 3,
-          avg_task_duration: 30,
-          priority_high: 0.3,
-          priority_medium: 0.5,
-          priority_low: 0.2,
-          task_type_excavation: 1,
-          task_type_navigation: 0,
-          task_type_communication: 0,
-          task_type_other: 0,
-          noise_level: 60,
-          site_activity: 25,
-          temperature: 25,
-          touchscreen_inputs: 20,
-          alert_response_time: 3,
-          joystick_pattern_erratic: 0,
+          "features": [
+            3,     // active_tasks
+            30,    // avg_task_duration
+            0.3,   // priority_high
+            0.5,   // priority_medium
+            0.2,   // priority_low
+            1,     // task_type_excavation
+            0,     // task_type_navigation
+            0,     // task_type_communication
+            0,     // task_type_other
+            60,    // noise_level
+            25,    // site_activity
+            25,    // temperature
+            20,    // touchscreen_inputs
+            3,     // alert_response_time
+            0,     // joystick_pattern_erratic
+          ]
         };
         
         const response = await ApiService.predictScore(defaultFeatures);
+        console.log('Fetched cognitive load score from API:', response.score);
         setScore(response.score);
       } catch (error) {
-        // Fallback to random score if API fails
-        const newScore = Math.floor(Math.random() * 70) + 20;
+        // Fallback calculation using cognitive load formula if API fails
+        console.error('Failed to fetch cognitive load:', error);
+        
+        // Use the same default features for fallback calculation
+        const active_tasks = 3;
+        const avg_task_duration = 30;
+        const priority_high = 0.3;
+        const noise_level = 60;
+        const site_activity = 25;
+        const touchscreen_inputs = 20;
+        const alert_response_time = 3;
+        const joystick_pattern_erratic = 0;
+        
+        // Apply cognitive load formula
+        const cognitive_load_score = (
+          0.3 * active_tasks / 10 +
+          0.2 * avg_task_duration / 60 +
+          0.2 * priority_high +
+          0.1 * noise_level / 120 +
+          0.1 * site_activity / 50 +
+          0.05 * touchscreen_inputs / 50 +
+          0.05 * alert_response_time / 10 +
+          0.05 * joystick_pattern_erratic
+        ) * 100;
+        
+        const newScore = Math.min(95, Math.max(20, Math.floor(cognitive_load_score)));
         setScore(newScore);
       }
       

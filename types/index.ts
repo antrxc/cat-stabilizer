@@ -62,21 +62,7 @@ export interface FeatureAdjustment {
 }
 
 export interface ApiPredictionRequest {
-  active_tasks: number;
-  avg_task_duration: number;
-  priority_high: number;
-  priority_medium: number;
-  priority_low: number;
-  task_type_excavation: number;
-  task_type_navigation: number;
-  task_type_communication: number;
-  task_type_other: number;
-  noise_level: number;
-  site_activity: number;
-  temperature: number;
-  touchscreen_inputs: number;
-  alert_response_time: number;
-  joystick_pattern_erratic: number;
+  features: number[];
 }
 
 export interface ApiPredictionResponse {

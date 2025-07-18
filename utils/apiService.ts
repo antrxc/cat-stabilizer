@@ -46,21 +46,23 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          active_tasks: 1,
-          avg_task_duration: 30,
-          priority_high: 0.3,
-          priority_medium: 0.5,
-          priority_low: 0.2,
-          task_type_excavation: 1,
-          task_type_navigation: 0,
-          task_type_communication: 0,
-          task_type_other: 0,
-          noise_level: 60,
-          site_activity: 25,
-          temperature: 25,
-          touchscreen_inputs: 20,
-          alert_response_time: 3,
-          joystick_pattern_erratic: 0,
+          features: [
+            1,     // active_tasks
+            30,    // avg_task_duration
+            0.3,   // priority_high
+            0.5,   // priority_medium
+            0.2,   // priority_low
+            1,     // task_type_excavation
+            0,     // task_type_navigation
+            0,     // task_type_communication
+            0,     // task_type_other
+            60,    // noise_level
+            25,    // site_activity
+            25,    // temperature
+            20,    // touchscreen_inputs
+            3,     // alert_response_time
+            0,     // joystick_pattern_erratic
+          ]
         }),
       });
       return response.ok;

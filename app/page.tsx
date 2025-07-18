@@ -118,7 +118,7 @@ export default function Home() {
 
   if (mode === 'minimal') {
     return (
-      <div className="min-h-screen bg-black" key={`minimal-${score}-${forceRender}`}>
+      <div className="min-h-screen bg-white" key={`minimal-${score}-${forceRender}`}>
         <Header score={score} mode={mode} isLoading={isLoading} />
         
         <main className="container mx-auto px-6 py-8 space-y-8">
@@ -148,10 +148,10 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-black" key={`standard-${score}-${forceRender}`}>
+    <div className="min-h-screen bg-white" key={`standard-${score}-${forceRender}`}>
       <Header score={score} mode={mode} isLoading={isLoading} />
       
-      {/* Debug Panel */}
+      {/* Debug Panel 
       <div className="bg-purple-900/30 border border-purple-600 p-4 m-4 rounded-lg">
         <h3 className="text-purple-300 font-bold">DEBUG - Dashboard Auto-Reload System (Render #{forceRender}):</h3>
         <p className="text-white">Score: {score}</p>
@@ -170,7 +170,7 @@ export default function Home() {
         >
           🧪 Test Random Score Update
         </button>
-      </div>
+      </div>*/}
       
       <main className="container mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

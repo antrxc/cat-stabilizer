@@ -17,11 +17,11 @@ export const Header = ({ score, mode, isLoading }: HeaderProps) => {
     <header className={`w-full p-4 ${isMinimal ? 'bg-gray-900' : 'bg-gray-900'} text-white font-mono border-b border-gray-800`}>
       <div className="flex items-center justify-between">
         <h1 className={`font-bold ${isMinimal ? 'text-xl' : 'text-2xl'} text-green-400`}>
-          ⚡ Cognitive Load Balancer
+          ⚡ CAT Stabilizer
         </h1>
         
         <div className="flex items-center gap-4">
-          {/* Navigation Links */}
+          {/* Navigation Links 
           <div className="flex gap-2">
             <Link 
               href="/"
@@ -35,7 +35,7 @@ export const Header = ({ score, mode, isLoading }: HeaderProps) => {
             >
               Features
             </Link>
-          </div>
+          </div>*/}
           
           {/* Score Indicator */}
           <div className="flex flex-col items-end">

@@ -192,6 +192,8 @@ export default function FeatureAdjustmentPage() {
   }, []);
 
   const handleFeatureChange = (featureId: string, newValue: number) => {
+    console.log('Slider changed:', featureId, 'new value:', newValue);
+    
     setFeatures(prev => 
       prev.map(feature => 
         feature.id === featureId 
@@ -206,6 +208,7 @@ export default function FeatureAdjustmentPage() {
         clearTimeout(autoPredictTimeout.current);
       }
       autoPredictTimeout.current = setTimeout(() => {
+        console.log('Auto-predict triggered by slider change');
         handlePredict();
       }, 1000); // 1 second delay after user stops changing values
     }
@@ -216,24 +219,32 @@ export default function FeatureAdjustmentPage() {
     setLoading(true); // Update global loading state
     setError('');
     
-    // Convert features to API request format
+    // Convert features to API request format (array of values in specific order)
+    const featuresArray = [
+      features.find(f => f.id === 'active_tasks')?.value || 0,
+      features.find(f => f.id === 'avg_task_duration')?.value || 0,
+      features.find(f => f.id === 'priority_high')?.value || 0,
+      features.find(f => f.id === 'priority_medium')?.value || 0,
+      features.find(f => f.id === 'priority_low')?.value || 0,
+      features.find(f => f.id === 'task_type_excavation')?.value || 0,
+      features.find(f => f.id === 'task_type_navigation')?.value || 0,
+      features.find(f => f.id === 'task_type_communication')?.value || 0,
+      features.find(f => f.id === 'task_type_other')?.value || 0,
+      features.find(f => f.id === 'noise_level')?.value || 0,
+      features.find(f => f.id === 'site_activity')?.value || 0,
+      features.find(f => f.id === 'temperature')?.value || 0,
+      features.find(f => f.id === 'touchscreen_inputs')?.value || 0,
+      features.find(f => f.id === 'alert_response_time')?.value || 0,
+      features.find(f => f.id === 'joystick_pattern_erratic')?.value || 0,
+    ];
+
+    console.log('Sending features array to API:', featuresArray);
+
     const apiRequest: ApiPredictionRequest = {
-      active_tasks: features.find(f => f.id === 'active_tasks')?.value || 0,
-      avg_task_duration: features.find(f => f.id === 'avg_task_duration')?.value || 0,
-      priority_high: features.find(f => f.id === 'priority_high')?.value || 0,
-      priority_medium: features.find(f => f.id === 'priority_medium')?.value || 0,
-      priority_low: features.find(f => f.id === 'priority_low')?.value || 0,
-      task_type_excavation: features.find(f => f.id === 'task_type_excavation')?.value || 0,
-      task_type_navigation: features.find(f => f.id === 'task_type_navigation')?.value || 0,
-      task_type_communication: features.find(f => f.id === 'task_type_communication')?.value || 0,
-      task_type_other: features.find(f => f.id === 'task_type_other')?.value || 0,
-      noise_level: features.find(f => f.id === 'noise_level')?.value || 0,
-      site_activity: features.find(f => f.id === 'site_activity')?.value || 0,
-      temperature: features.find(f => f.id === 'temperature')?.value || 0,
-      touchscreen_inputs: features.find(f => f.id === 'touchscreen_inputs')?.value || 0,
-      alert_response_time: features.find(f => f.id === 'alert_response_time')?.value || 0,
-      joystick_pattern_erratic: features.find(f => f.id === 'joystick_pattern_erratic')?.value || 0,
+      features: featuresArray
     };
+
+    console.log('API request payload:', JSON.stringify(apiRequest, null, 2));
 
     try {
       const response = await ApiService.predictScore(apiRequest);
@@ -256,8 +267,30 @@ export default function FeatureAdjustmentPage() {
       setError('Failed to get prediction from API. Using fallback value.');
       setApiConnected(false);
       
-      // Fallback score
-      const fallbackScore = Math.floor(Math.random() * 70) + 20;
+      // Fallback score using cognitive load formula
+      const active_tasks = featuresArray[0];
+      const avg_task_duration = featuresArray[1];
+      const priority_high = featuresArray[2];
+      const noise_level = featuresArray[9];
+      const site_activity = featuresArray[10];
+      const touchscreen_inputs = featuresArray[12];
+      const alert_response_time = featuresArray[13];
+      const joystick_pattern_erratic = featuresArray[14];
+      
+      const cognitive_load_score = (
+        0.3 * active_tasks / 10 +
+        0.2 * avg_task_duration / 60 +
+        0.2 * priority_high +
+        0.1 * noise_level / 120 +
+        0.1 * site_activity / 50 +
+        0.05 * touchscreen_inputs / 50 +
+        0.05 * alert_response_time / 10 +
+        0.05 * joystick_pattern_erratic
+      ) * 100;
+      
+      const fallbackScore = Math.min(95, Math.max(20, Math.floor(cognitive_load_score)));
+      console.log('Using fallback score calculated from sliders:', fallbackScore);
+      
       setPredictedScore(fallbackScore);
       setLastPrediction(new Date().toLocaleTimeString());
       
@@ -309,7 +342,7 @@ export default function FeatureAdjustmentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen bg-white text-white p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -333,7 +366,7 @@ export default function FeatureAdjustmentPage() {
             </div>
           </div>
           
-          {/* Debug Panel */}
+          {/* Debug Panel 
           <div className="bg-purple-900/30 border border-purple-600 p-4 mb-4 rounded-lg">
             <h3 className="text-purple-300 font-bold">DEBUG - Features Context State:</h3>
             <p className="text-white">Global Score: {globalScore}</p>
@@ -347,7 +380,7 @@ export default function FeatureAdjustmentPage() {
             <p className="text-xs text-yellow-400 mt-1">
               ⚡ Reload Trigger: Dashboard reload signal sent after each API prediction
             </p>
-          </div>
+          </div>*/}
           
           <p className="text-gray-300">
             Adjust the 15 model features to simulate different cognitive load conditions and get real-time predictions.
