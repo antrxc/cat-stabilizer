@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CognitiveLoadProvider } from "@/hooks/useCognitiveLoadContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({
         />
       </head>
       <body className="font-mono antialiased">
-        {children}
+        <CognitiveLoadProvider>
+          {children}
+        </CognitiveLoadProvider>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import type { UIMode } from '@/types';
 
 interface HeaderProps {
@@ -9,6 +10,7 @@ interface HeaderProps {
 }
 
 export const Header = ({ score, mode, isLoading }: HeaderProps) => {
+  console.log('Header rendering with score:', score, 'mode:', mode, 'timestamp:', new Date().toLocaleTimeString());
   const isMinimal = mode === 'minimal';
   
   return (
@@ -19,6 +21,22 @@ export const Header = ({ score, mode, isLoading }: HeaderProps) => {
         </h1>
         
         <div className="flex items-center gap-4">
+          {/* Navigation Links */}
+          <div className="flex gap-2">
+            <Link 
+              href="/"
+              className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm"
+            >
+              Dashboard
+            </Link>
+            <Link 
+              href="/features"
+              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm"
+            >
+              Features
+            </Link>
+          </div>
+          
           {/* Score Indicator */}
           <div className="flex flex-col items-end">
             <div className={`text-sm opacity-80 ${isMinimal ? 'text-base' : ''} font-mono text-gray-300`}>

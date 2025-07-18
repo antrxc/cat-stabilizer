@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { ApiService } from '@/utils/apiService';
+import type { ApiPredictionRequest } from '@/types';
 
 interface CognitiveLoadData {
   score: number;
@@ -21,19 +23,41 @@ export function useCognitiveLoad(): CognitiveLoadData {
     setLastUpdated(new Date().toLocaleTimeString());
   }, []);
 
-  // Simulate API call to fetch cognitive load score
+  // Fetch cognitive load score from API
   useEffect(() => {
     if (!isHydrated) return;
 
     const fetchCognitiveLoad = async () => {
       setIsLoading(true);
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      try {
+        // Get score from API with default operational features
+        const defaultFeatures: ApiPredictionRequest = {
+          active_tasks: 3,
+          avg_task_duration: 30,
+          priority_high: 0.3,
+          priority_medium: 0.5,
+          priority_low: 0.2,
+          task_type_excavation: 1,
+          task_type_navigation: 0,
+          task_type_communication: 0,
+          task_type_other: 0,
+          noise_level: 60,
+          site_activity: 25,
+          temperature: 25,
+          touchscreen_inputs: 20,
+          alert_response_time: 3,
+          joystick_pattern_erratic: 0,
+        };
+        
+        const response = await ApiService.predictScore(defaultFeatures);
+        setScore(response.score);
+      } catch (error) {
+        // Fallback to random score if API fails
+        const newScore = Math.floor(Math.random() * 70) + 20;
+        setScore(newScore);
+      }
       
-      // Generate a random score between 20-90 for demo purposes
-      const newScore = Math.floor(Math.random() * 70) + 20;
-      setScore(newScore);
       setLastUpdated(new Date().toLocaleTimeString());
       setIsLoading(false);
     };
