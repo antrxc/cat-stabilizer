@@ -29,11 +29,11 @@ export const ResetPausePrompt = ({ onAcknowledge, onSkip }: ResetPausePromptProp
   }
 
   return (
-    <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6">
+    <div className="bg-green-900/30 border-2 border-green-700 rounded-lg p-6">
       <div className="text-center">
         <div className="text-4xl mb-4">🧘</div>
-        <h2 className="text-2xl font-bold text-green-800 mb-2">Take a Breather</h2>
-        <p className="text-lg text-green-700 mb-6">
+        <h2 className="text-2xl font-bold text-green-200 mb-2">Take a Breather</h2>
+        <p className="text-lg text-green-300 mb-6">
           High cognitive load detected. Consider taking a 10-second break to reset your focus.
         </p>
         
@@ -46,7 +46,7 @@ export const ResetPausePrompt = ({ onAcknowledge, onSkip }: ResetPausePromptProp
           </button>
           <button
             onClick={handleSkip}
-            className="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-400 transition-colors text-lg"
+            className="px-6 py-3 bg-gray-600 text-gray-200 rounded-lg font-medium hover:bg-gray-500 transition-colors text-lg"
           >
             ⏭️ Skip for Now
           </button>

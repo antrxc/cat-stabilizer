@@ -26,25 +26,25 @@ export const VoicePromptBanner = ({ currentPrompt, onPlayAudio, onPausePrompt }:
 
   if (!currentPrompt) {
     return (
-      <div className="bg-gray-100 border border-gray-300 rounded-lg p-6 text-center">
+      <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 text-center">
         <div className="text-2xl text-gray-400 mb-2">🔇</div>
-        <div className="text-xl text-gray-600">No active voice prompt</div>
+        <div className="text-xl text-gray-300">No active voice prompt</div>
       </div>
     );
   }
 
   return (
-    <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
+    <div className="bg-purple-900/30 border-2 border-purple-700 rounded-lg p-6">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-blue-800">Voice Prompt</h2>
+        <h2 className="text-xl font-bold text-purple-200">Voice Prompt</h2>
         <div className="flex gap-2">
           <button
             onClick={handlePlayAudio}
             disabled={isPlaying}
             className={`px-4 py-2 rounded-lg font-medium transition-colors ${
               isPlaying 
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                : 'bg-blue-600 text-white hover:bg-blue-700'
+                ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                : 'bg-cyan-600 text-white hover:bg-cyan-700'
             }`}
           >
             {isPlaying ? '🔊 Playing...' : '🔊 Play Audio'}
@@ -58,11 +58,11 @@ export const VoicePromptBanner = ({ currentPrompt, onPlayAudio, onPausePrompt }:
         </div>
       </div>
 
-      <div className="bg-white rounded-lg p-4 border border-blue-300">
-        <div className="text-2xl text-blue-800 font-bold mb-2">
+      <div className="bg-black rounded-lg p-4 border border-purple-600">
+        <div className="text-2xl text-purple-200 font-bold mb-2">
           "{currentPrompt.message}"
         </div>
-        <div className="text-sm text-blue-600">
+        <div className="text-sm text-purple-300">
           {currentPrompt.type.charAt(0).toUpperCase() + currentPrompt.type.slice(1)} • {isHydrated ? currentPrompt.timestamp.toLocaleTimeString() : 'Loading...'}
         </div>
       </div>
@@ -74,7 +74,7 @@ export const VoicePromptBanner = ({ currentPrompt, onPlayAudio, onPausePrompt }:
             {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
               <div 
                 key={index}
-                className="w-2 bg-blue-500 rounded-t animate-pulse"
+                className="w-2 bg-cyan-400 rounded-t animate-pulse"
                 style={{ 
                   height: `${(index % 3 + 1) * 8 + 8}px`,
                   animationDelay: `${index * 0.1}s`

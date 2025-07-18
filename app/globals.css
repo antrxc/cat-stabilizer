@@ -1,26 +1,183 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #000000;
+  --foreground: #ffffff;
+  --card-bg: #000000;
+  --card-border: #222222;
+  --accent-primary: #00ff88;
+  --accent-secondary: #ff6b35;
+  --accent-tertiary: #a855f7;
+  --accent-warning: #ffd700;
+  --accent-error: #ff1744;
+  --accent-info: #00e5ff;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #888888;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Fira Code", Monaco, "Cascadia Code", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  font-feature-settings: "liga" 1, "calt" 1;
+  font-variant-ligatures: contextual;
+}
+
+/* Override Tailwind's default font families */
+.font-sans {
+  font-family: "Fira Code", Monaco, "Cascadia Code", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+}
+
+.font-mono {
+  font-family: "Fira Code", Monaco, "Cascadia Code", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+}
+
+/* OLED True Black Mode Overrides */
+.bg-white {
+  background-color: var(--card-bg) !important;
+}
+
+.bg-gray-50 {
+  background-color: #111111 !important;
+}
+
+.bg-gray-100 {
+  background-color: #000000 !important;
+}
+
+.bg-gray-200 {
+  background-color: #1a1a1a !important;
+}
+
+.bg-gray-800 {
+  background-color: #111111 !important;
+}
+
+.bg-gray-900 {
+  background-color: #000000 !important;
+}
+
+.bg-blue-50 {
+  background-color: #000000 !important;
+}
+
+.bg-blue-600 {
+  background-color: var(--accent-secondary) !important;
+}
+
+.bg-blue-700 {
+  background-color: var(--accent-tertiary) !important;
+}
+
+.bg-blue-900 {
+  background-color: #000000 !important;
+}
+
+.bg-green-100 {
+  background-color: #000000 !important;
+}
+
+.bg-green-500 {
+  background-color: var(--accent-primary) !important;
+}
+
+.bg-green-900 {
+  background-color: #000000 !important;
+}
+
+.bg-yellow-100 {
+  background-color: #000000 !important;
+}
+
+.bg-yellow-500 {
+  background-color: var(--accent-warning) !important;
+}
+
+.bg-yellow-900 {
+  background-color: #000000 !important;
+}
+
+.bg-red-100 {
+  background-color: #000000 !important;
+}
+
+.bg-red-500 {
+  background-color: var(--accent-error) !important;
+}
+
+.bg-red-900 {
+  background-color: #000000 !important;
+}
+
+.bg-purple-900 {
+  background-color: #000000 !important;
+}
+
+.text-blue-200 {
+  color: var(--accent-info) !important;
+}
+
+.text-blue-300 {
+  color: var(--accent-info) !important;
+}
+
+.text-blue-800 {
+  color: var(--accent-info) !important;
+}
+
+.text-blue-900 {
+  color: var(--accent-info) !important;
+}
+
+.text-gray-800 {
+  color: var(--text-primary) !important;
+}
+
+.text-gray-600 {
+  color: var(--text-secondary) !important;
+}
+
+.text-gray-500 {
+  color: var(--text-muted) !important;
+}
+
+.text-gray-300 {
+  color: var(--text-secondary) !important;
+}
+
+.text-gray-400 {
+  color: var(--text-muted) !important;
+}
+
+.border-gray-200 {
+  border-color: var(--card-border) !important;
+}
+
+.border-gray-300 {
+  border-color: #333333 !important;
+}
+
+.border-gray-600 {
+  border-color: #444444 !important;
+}
+
+.border-gray-700 {
+  border-color: #333333 !important;
+}
+
+.border-gray-800 {
+  border-color: var(--card-border) !important;
+}
+
+.border-blue-600 {
+  border-color: var(--accent-info) !important;
+}
+
+.border-blue-700 {
+  border-color: var(--accent-tertiary) !important;
+}
+
+.border-blue-800 {
+  border-color: var(--accent-info) !important;
 }

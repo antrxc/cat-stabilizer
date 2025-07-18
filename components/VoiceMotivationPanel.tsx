@@ -24,39 +24,39 @@ export const VoiceMotivationPanel = ({ lastVoiceMessage, motivationalPrompt }: V
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Voice & Motivation</h2>
+    <div className="bg-gray-900 rounded-lg shadow-2xl p-6 font-mono border border-gray-800">
+      <h2 className="text-xl font-semibold mb-4 text-green-400">🎙️ Voice & Motivation</h2>
       
       <div className="space-y-4">
         {/* Last Voice Message */}
         {lastVoiceMessage && (
-          <div className="p-3 bg-gray-50 rounded-lg">
+          <div className="p-3 bg-gray-800 rounded-lg border border-gray-700">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-lg">{getMessageIcon(lastVoiceMessage.type)}</span>
-              <span className="text-sm text-gray-600">Last Voice Message</span>
+              <span className="text-sm text-gray-300 font-mono">Last Voice Message</span>
             </div>
-            <p className="text-gray-800 italic">"{lastVoiceMessage.message}"</p>
-            <div className="text-xs text-gray-500 mt-1">
+            <p className="text-orange-300 italic font-mono">"{lastVoiceMessage.message}"</p>
+            <div className="text-xs text-gray-400 mt-1 font-mono">
               {isHydrated ? lastVoiceMessage.timestamp.toLocaleTimeString() : 'Loading...'}
             </div>
           </div>
         )}
 
         {/* Motivational Prompt */}
-        <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+        <div className="p-4 bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg border border-purple-700">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-lg">🎯</span>
-            <span className="text-sm font-medium text-blue-800">Motivation</span>
+            <span className="text-sm font-medium text-purple-300 font-mono">Motivation</span>
           </div>
-          <p className="text-blue-900 font-medium">{motivationalPrompt}</p>
+          <p className="text-purple-200 font-medium font-mono">{motivationalPrompt}</p>
         </div>
 
         {/* Voice Controls */}
         <div className="flex gap-2">
-          <button className="flex-1 px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm">
+          <button className="flex-1 px-3 py-2 bg-blue-700 text-white rounded hover:bg-blue-600 transition-colors text-sm font-mono border border-blue-600">
             🔊 Play Last Message
           </button>
-          <button className="px-3 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors text-sm">
+          <button className="px-3 py-2 bg-gray-700 text-gray-300 rounded hover:bg-gray-600 transition-colors text-sm font-mono border border-gray-600">
             🔇 Mute
           </button>
         </div>

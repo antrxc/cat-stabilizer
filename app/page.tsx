@@ -53,7 +53,7 @@ export default function Home() {
 
   if (mode === 'minimal') {
     return (
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen bg-black">
         <Header score={score} mode={mode} isLoading={isLoading} />
         
         <main className="container mx-auto px-6 py-8 space-y-8">
@@ -83,7 +83,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black">
       <Header score={score} mode={mode} isLoading={isLoading} />
       
       <main className="container mx-auto px-6 py-8">
